@@ -1,0 +1,41 @@
+# Build artifacts
+backend/build/
+*.o
+*.obj
+*.lib
+*.a
+*.so
+*.dylib
+
+# Executables
+*.exe
+*.out
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Models (large files)
+models/*.gguf
+models/*.bin
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+npm-debug.log*
+
+# Misc
+.env
+*.tmp
