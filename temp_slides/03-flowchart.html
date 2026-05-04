@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptShell - Flowchart</title>
+  <style>
+    :root {
+      --bg:#09131f; --panel:#102035; --text:#eef6ff; --muted:#b4c2d6; --green:#34d399; --blue:#38bdf8; --violet:#a78bfa; --yellow:#fbbf24;
+    }
+    *{box-sizing:border-box;}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:radial-gradient(circle at center top,#16304f 0%, #09131f 44%, #050b13 100%);color:var(--text);font-family:"Trebuchet MS","Gill Sans","Segoe UI",sans-serif;}
+    .slide{width:100vw;height:100vh;padding:32px 39px;position:relative;}
+    .title{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;}
+    h1{margin:0;font-size:46px;letter-spacing:-1px;}
+    .sub{font-size:18px;color:var(--muted);max-width:980px;line-height:1.4;margin-top:6px;}
+    .badge{padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:var(--muted);font-size:16px;}
+    .flow { position:relative; height: calc(100% - 110px); border-radius:30px; background:rgba(16,32,53,.55); border:1px solid rgba(255,255,255,.08); padding:18px 20px; overflow:hidden; display:flex; flex-direction:column; gap:12px; }
+    .row { display:flex; align-items:stretch; justify-content:space-between; gap:16px; margin-bottom:0; }
+    .node { flex:1; min-height:80px; border-radius:22px; padding:12px 12px 10px; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); box-shadow:0 18px 32px rgba(0,0,0,.24); }
+    .node h2{margin:0 0 4px;font-size:19px;}
+    .node p{margin:0;font-size:13px;line-height:1.3;color:var(--muted);}
+    .arrow{font-size:42px;font-weight:700;color:#fff;opacity:.85;min-width:42px;text-align:center;}
+    .small{min-height:72px;}
+    .tag { display:inline-block; margin-top:6px; padding:4px 8px; border-radius:999px; font-size:12px; color:#06101a; font-weight:700; }
+    .t1{background:var(--green);} .t2{background:var(--blue);} .t3{background:var(--violet);} .t4{background:var(--yellow);} 
+    .legend{margin-top:auto; padding:11px 13px; border-radius:18px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10);}
+    .legend h3{margin:0 0 6px;font-size:16px;}
+    .legend ul{margin:0; padding-left:16px; color:var(--muted); font-size:13px; line-height:1.35; columns:2; column-gap:20px;}
+    .footer{position:absolute;left:52px;bottom:24px;color:#cbd5e1;font-size:16px;opacity:.82;}
+    .top-note{font-size:16px;color:#9fb4d1;margin-top:4px;}
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="title">
+      <div>
+        <div class="badge">End-to-end working flow</div>
+        <h1>How everything connects</h1>
+        <div class="sub">This slide shows the pipeline from writing C++ code to building PromptShell, running the backend, loading TinyLlama through llama.cpp, and returning a clean response.</div>
+      </div>
+      <div class="badge">C++ + Build + Model + Output</div>
+    </div>
+
+    <div class="flow">
+      <div class="row">
+        <div class="node">
+          <h2>1. C++ Source Code</h2>
+          <p>The user writes a file like <strong>abc.cpp</strong> and passes it to PromptShell for run or debug.</p>
+          <span class="tag t1">Input</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node">
+          <h2>2. PromptShell Backend</h2>
+          <p>C++ CLI reads the file, runs compile/run logic, and prepares the prompt for the assistant.</p>
+          <span class="tag t2">Controller</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node">
+          <h2>3. CMake + Ninja</h2>
+          <p>CMake generates build files, Ninja compiles fast, and the backend binary is produced.</p>
+          <span class="tag t3">Build</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="node small">
+          <h2>4. CodeRunner</h2>
+          <p>Compiles the code with g++ and captures compile/runtime output for debug mode.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node small">
+          <h2>5. llama.cpp</h2>
+          <p>The C++ inference engine calls the local model and generates the explanation.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node small">
+          <h2>6. TinyLlama GGUF</h2>
+          <p>The actual model weights are loaded from the GGUF file stored in the models folder.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node small">
+          <h2>7. Clean Response</h2>
+          <p>The answer is post-processed and shown in the terminal for screenshot-friendly output.</p>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>Short version</h3>
+        <ul>
+          <li>C++ handles the app logic.</li>
+          <li>CMake + Ninja handle building.</li>
+          <li>llama.cpp runs the local model.</li>
+          <li>TinyLlama gives the AI response.</li>
+          <li>PromptShell formats the result.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">Slide 3 of 6</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptShell - Title</title>
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0d1b2a;
+      --bg3: #13253a;
+      --text: #eef4ff;
+      --muted: #b9c7de;
+      --accent: #63e6be;
+      --accent2: #7dd3fc;
+      --card: rgba(11, 20, 34, 0.72);
+      --line: rgba(125, 211, 252, 0.22);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: radial-gradient(circle at top left, #18304f 0%, var(--bg1) 36%, #050b14 100%);
+      color: var(--text);
+      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+    }
+    .slide {
+      width: 100vw; height: 100vh; position: relative; overflow: hidden;
+      padding: 36px 42px;
+    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(6px); opacity: .35; }
+    .orb.a { width: 340px; height: 340px; background: #1f7a8c; top: -90px; right: -80px; }
+    .orb.b { width: 260px; height: 260px; background: #3b82f6; bottom: -90px; left: -90px; }
+    .grid {
+      position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px; mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+    }
+    .topline { display:flex; justify-content:space-between; align-items:center; position:relative; z-index:2; }
+    .badge {
+      display:inline-flex; gap:10px; align-items:center; padding:10px 16px; border:1px solid var(--line);
+      border-radius:999px; background: rgba(255,255,255,.04); color: var(--muted); font-size: 18px; letter-spacing: .5px;
+      backdrop-filter: blur(10px);
+    }
+    .dot { width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 18px var(--accent); }
+    .hero { position:relative; z-index:2; display:grid; grid-template-columns: 1.15fr .85fr; gap: 26px; align-items:center; height: calc(100% - 54px); }
+    h1 { margin: 0; font-size: clamp(52px, 7vw, 92px); line-height: .94; letter-spacing: -2px; }
+    .subtitle {
+      margin-top: 12px; max-width: 760px; font-size: clamp(18px, 1.8vw, 24px); line-height: 1.32; color: var(--muted);
+    }
+    .highlight { color: var(--accent); font-weight: 700; }
+    .panel {
+      align-self: stretch; border: 1px solid var(--line); border-radius: 28px; padding: 16px; background: var(--card);
+      box-shadow: 0 28px 60px rgba(0,0,0,.35); backdrop-filter: blur(12px);
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .stack-title { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin: 0 0 10px; }
+    .chips { display:flex; flex-wrap:wrap; gap:12px; }
+    .chip {
+      padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05);
+      font-size: 14px; color: var(--text);
+    }
+    .flowcard {
+      margin-top: 14px; padding: 14px; border-radius: 22px; background: linear-gradient(180deg, rgba(99,230,190,.12), rgba(125,211,252,.08)); border: 1px solid rgba(125,211,252,.20);
+    }
+    .flowcard h3 { margin:0 0 6px; font-size: 18px; }
+    .flowcard p { margin:0; color: var(--muted); font-size: 14px; line-height:1.45; }
+    .flowcard strong { color: #ffffff; font-weight: 700; }
+    .shot {
+      border:1px solid rgba(255,255,255,.12); border-radius:26px; overflow:hidden; background:rgba(4,10,18,.9);
+      box-shadow:0 24px 50px rgba(0,0,0,.38);
+    }
+    .shot img { display:block; width:100%; height:100%; object-fit:cover; }
+    .shot-caption { margin-top:10px; color:var(--muted); font-size:15px; text-align:center; }
+    .footer-note { position:absolute; left:56px; bottom: 28px; z-index:2; color: #cbd5e1; font-size: 15px; opacity:.8; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grid"></div>
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+
+    <div class="topline">
+      <div class="badge"><span class="dot"></span> Local AI Coding Assistant</div>
+      <div class="badge">Offline AI Coding Assistant</div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <h1>PromptShell</h1>
+        <div class="subtitle">
+          A <span class="highlight">local AI coding assistant</span> built with C++, llama.cpp, and a modular toolchain for debug, run, and assistant workflows.
+        </div>
+        <div class="flowcard" style="max-width:760px; margin-top:16px;">
+          <h3>Team</h3>
+          <p><strong>Moumita Baishya</strong> 240102025<br /><strong>Sahid Ahmed</strong> 240102002</p>
+        </div>
+        <div class="flowcard" style="max-width:760px;">
+          <h3>What it does</h3>
+          <p>It reads code, compiles it locally, explains errors, and returns a clean AI response without needing cloud APIs.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div>
+          <div class="stack-title">Core Stack</div>
+          <div class="chips">
+            <div class="chip">C++ Backend</div>
+            <div class="chip">llama.cpp</div>
+            <div class="chip">TinyLlama</div>
+            <div class="chip">CMake</div>
+            <div class="chip">Ninja</div>
+            <div class="chip">OOP Design</div>
+            <div class="chip">MSYS2 MinGW64</div>
+          </div>
+        </div>
+        <div>
+          <div class="shot">
+            <img src="home.png" alt="PromptShell terminal screenshot" />
+          </div>
+          <div class="shot-caption">Terminal snapshot: command-line flow in action</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">Slide 1 of 6</div>
+  </div>
+</body>
+</html>

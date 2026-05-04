@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptShell - Why Required</title>
+  <style>
+    :root {
+      --bg: #08111d; --panel:#101c2d; --text:#eff6ff; --muted:#b6c3d7; --accent:#f59e0b; --accent2:#38bdf8;
+    }
+    * { box-sizing:border-box; }
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background: linear-gradient(135deg, #09111c 0%, #111d2f 45%, #07111c 100%); color:var(--text); font-family:"Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif; }
+    .slide { width:100vw; height:100vh; padding:40px 45px; position:relative; }
+    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom: 28px; }
+    .badge { padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:var(--muted); font-size:17px; }
+    h1 { margin:0; font-size:48px; letter-spacing:-1px; }
+    .intro { margin-top:8px; font-size:20px; color:var(--muted); max-width:980px; line-height:1.35; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
+    .card { background:rgba(16,28,45,.82); border:1px solid rgba(255,255,255,.10); border-radius:26px; padding:18px; box-shadow:0 20px 40px rgba(0,0,0,.26); }
+    .card h2 { margin:0 0 10px; font-size:24px; color:#f8fafc; }
+    .card p, .card li { color:var(--muted); font-size:18px; line-height:1.5; }
+    ul { margin:0; padding-left:18px; }
+    .callout { margin-top:16px; padding:16px 18px; border-radius:22px; background:linear-gradient(180deg, rgba(245,158,11,.14), rgba(56,189,248,.10)); border:1px solid rgba(245,158,11,.25); }
+    .callout strong { color:#fff; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .pill { padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10); font-size:16px; }
+    .footer { position:absolute; left:60px; bottom:30px; color:#cbd5e1; font-size:16px; opacity:.8; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <div>
+        <div class="badge">Why this project exists</div>
+        <h1>Why it is required</h1>
+        <div class="intro">PromptShell solves the gap between writing code and understanding it fast, locally, and in a developer-friendly workflow.</div>
+      </div>
+      <div class="badge">Problem → Solution</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Problems it addresses</h2>
+        <ul>
+          <li>Students and beginners often need a quick explanation of compiler errors.</li>
+          <li>Cloud AI tools are not always available, private, or fast enough for local development.</li>
+          <li>Switching between terminal, editor, and browser slows debugging.</li>
+          <li>A resume project should show real engineering: build system, architecture, and tooling.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>What PromptShell gives</h2>
+        <ul>
+          <li>Offline AI assistance using a local model.</li>
+          <li>Integrated run and debug flow for C++ files.</li>
+          <li>Clean, terminal-friendly explanations and fixes.</li>
+          <li>Modular architecture that is easy to extend later.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Simple idea:</strong> write code, run PromptShell, see the compiler error, get a clear explanation, and fix the issue without leaving the terminal.
+      <div class="pill-row">
+        <div class="pill">Local</div>
+        <div class="pill">Fast</div>
+        <div class="pill">Private</div>
+        <div class="pill">Resume-worthy</div>
+      </div>
+    </div>
+
+    <div class="footer">Slide 2 of 6</div>
+  </div>
+</body>
+</html>

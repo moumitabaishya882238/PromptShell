@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptShell - C++ OOP</title>
+  <style>
+    :root { --bg:#07111d; --panel:#111e31; --text:#eef5ff; --muted:#b7c5d9; --accent:#60a5fa; --accent2:#34d399; --accent3:#f59e0b; }
+    *{box-sizing:border-box;}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:linear-gradient(135deg,#08111d 0%, #0f1b2d 42%, #06101a 100%);color:var(--text);font-family:"Trebuchet MS","Gill Sans","Segoe UI",sans-serif;}
+    .slide{width:100vw;height:100vh;padding:20px 28px;position:relative;}
+    .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+    h1{margin:0;font-size:36px;letter-spacing:-1px;}
+    .sub{margin-top:4px;font-size:14px;color:var(--muted);max-width:920px;line-height:1.3;}
+    .badge{padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:var(--muted);font-size:16px;}
+    .layout{display:grid;grid-template-columns:1.05fr .95fr;gap:10px;height:calc(100% - 72px);}
+    .panel{background:rgba(17,30,49,.78);border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:12px;box-shadow:0 22px 44px rgba(0,0,0,.26);overflow:hidden;}
+    .panel h2{margin:0 0 8px;font-size:18px;}
+    .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .mini{padding:10px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);min-height:80px;}
+    .mini h3{margin:0 0 4px;font-size:15px;}
+    .mini p{margin:0;font-size:12px;line-height:1.3;color:var(--muted);}
+    .concepts{display:grid;grid-template-columns:1fr;gap:8px;}
+    .concept{padding:10px 11px;border-radius:16px;background:linear-gradient(180deg, rgba(96,165,250,.12), rgba(52,211,153,.08));border:1px solid rgba(96,165,250,.18);} 
+    .concept strong{display:block;font-size:15px;margin-bottom:3px;}
+    .concept span{color:var(--muted);font-size:12px;line-height:1.3;display:block;}
+    .class-map{margin-top:8px;padding:10px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+    .class-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;}
+    .cls{padding:8px 9px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);}
+    .cls b{display:block;font-size:14px;margin-bottom:3px;color:#fff;}
+    .cls em{font-style:normal;color:var(--muted);font-size:11px;line-height:1.25;}
+    .footer{position:absolute;left:38px;bottom:16px;color:#cbd5e1;font-size:14px;opacity:.82;}
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="head">
+      <div>
+        <div class="badge">OOP in the backend</div>
+        <h1>C++ and OOP concepts used here</h1>
+        <div class="sub">PromptShell is not a single-file script. It is split into classes so each part has one clear job, which makes the system easier to maintain and extend.</div>
+      </div>
+      <div class="badge">Encapsulation • Abstraction • Polymorphism</div>
+    </div>
+
+    <div class="layout">
+      <div class="panel">
+        <h2>Main OOP ideas</h2>
+        <div class="card-grid">
+          <div class="mini">
+            <h3>Encapsulation</h3>
+            <p>Each class keeps its data and helper methods together, so the rest of the code only uses the public API.</p>
+          </div>
+          <div class="mini">
+            <h3>Abstraction</h3>
+            <p>The terminal user sees simple commands, while the internal model and compiler steps stay hidden.</p>
+          </div>
+          <div class="mini">
+            <h3>Inheritance</h3>
+            <p>AssistantMode is a base class and the different modes extend it with their own behavior.</p>
+          </div>
+          <div class="mini">
+            <h3>Polymorphism</h3>
+            <p>Debug, concise, and code-only modes can be switched without changing the main flow.</p>
+          </div>
+        </div>
+
+        <div class="class-map">
+          <h2 style="margin:0 0 6px;font-size:26px;">Core classes</h2>
+          <div class="class-row">
+            <div class="cls"><b>PromptShell</b><em>Coordinates the whole prompt, answer, and output workflow.</em></div>
+            <div class="cls"><b>LLMEngine</b><em>Launches llama-cli and reads the model response.</em></div>
+            <div class="cls"><b>CodeRunner</b><em>Compiles and runs C++ code, then captures errors.</em></div>
+            <div class="cls"><b>AssistantMode</b><em>Changes behavior for default, concise, code-only, and debug modes.</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Why this is good design</h2>
+        <div class="concepts">
+          <div class="concept"><strong>Single Responsibility</strong><span>Each class does one thing only, so the code is easier to test and fix.</span></div>
+          <div class="concept"><strong>Reusability</strong><span>Assistant modes and runner logic can be reused without rewriting the whole app.</span></div>
+          <div class="concept"><strong>Maintainability</strong><span>When the LLM or compiler flow changes, only the related class needs updates.</span></div>
+          <div class="concept"><strong>Scalability</strong><span>Future features like a Node.js bridge or VS Code extension can plug into this structure.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Slide 4 of 6</div>
+  </div>
+</body>
+</html>
