@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
 
 class AssistantMode {
 public:
@@ -37,11 +40,12 @@ public:
 class DebugMode : public AssistantMode {
 public:
     std::string system_instructions() const override {
-        return "Act as a C++ debugger and teacher. When given user code and compiler/runtime output,\n"
-               "1) Provide a numbered annotated listing indicating error/important lines.\n"
-               "2) For each problem, give a concise root-cause explanation and severity.\n"
-               "3) Provide a minimal corrected code listing that fixes the problem.\n"
-               "4) Give a short concept explanation why the fix works and next tests to run.";
+        return "You are a C++ code debugger. For every code error, you MUST follow this exact format:\n\n"
+               "1. A paragraph starting with 'These type of errors are due to...' explaining the conceptual reason for the error.\n"
+               "2. A sentence like 'In your case, look around near line [X]...' (identify the line number from the compiler output if possible).\n"
+               "3. A section starting with 'Here is an example of one of your use cases type:' followed by a short snippet showing the pattern.\n"
+               "4. The complete corrected code block.\n\n"
+               "Be professional, educational, and follow this sequence strictly.";
     }
     std::string postprocess(const std::string &reply) const override {
         return reply;

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptShell - Thank You</title>
+  <style>
+    :root {
+      --bg:#07111d; --panel:#101c2d; --text:#eef5ff; --muted:#b7c5d9; --accent:#63e6be; --accent2:#7dd3fc;
+    }
+    * { box-sizing:border-box; }
+    html, body {
+      width:100%; height:100%; margin:0; overflow:hidden;
+      background: radial-gradient(circle at top, #18304f 0%, #07111d 40%, #050913 100%);
+      color:var(--text); font-family:"Trebuchet MS","Gill Sans","Segoe UI",sans-serif;
+    }
+    .slide { width:100vw; height:100vh; padding:36px 42px; position:relative; overflow:hidden; }
+    .grid {
+      position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px; mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+    }
+    .orb { position:absolute; border-radius:50%; filter:blur(6px); opacity:.28; }
+    .orb.a { width:320px; height:320px; background:#1f7a8c; top:-70px; right:-70px; }
+    .orb.b { width:240px; height:240px; background:#3b82f6; bottom:-80px; left:-80px; }
+    .content {
+      position:relative; z-index:2; height:100%; display:flex; align-items:center; justify-content:center;
+      text-align:center;
+    }
+    .card {
+      width:min(920px, 100%); padding:32px 28px; border-radius:34px; background:rgba(16,28,45,.80);
+      border:1px solid rgba(255,255,255,.10); box-shadow:0 28px 60px rgba(0,0,0,.35); backdrop-filter: blur(12px);
+    }
+    .badge {
+      display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:var(--muted); font-size:18px;
+    }
+    .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 18px var(--accent); }
+    h1 { margin:14px 0 10px; font-size:clamp(56px, 8.5vw, 98px); line-height:.95; letter-spacing:-2px; }
+    p { margin:0 auto; max-width:780px; font-size:clamp(20px, 2vw, 28px); line-height:1.35; color:var(--muted); }
+    .footer { position:absolute; left:56px; bottom:28px; z-index:2; color:#cbd5e1; font-size:15px; opacity:.8; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grid"></div>
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+
+    <div class="content">
+      <div class="card">
+        <div class="badge"><span class="dot"></span> PromptShell</div>
+        <h1>Thank You</h1>
+        <p>Thanks for watching. PromptShell brings C++, OOP, local LLMs, and terminal-first debugging into one workflow.</p>
+      </div>
+    </div>
+
+    <div class="footer">Slide 6 of 6</div>
+  </div>
+</body>
+</html>

@@ -26,6 +26,37 @@ bool starts_with(const std::string &value, const std::string &prefix) {
     return value.rfind(prefix, 0) == 0;
 }
 
+std::string trim_copy(std::string s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch){ return !std::isspace(ch); }));
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch){ return !std::isspace(ch); }).base(), s.end());
+    return s;
+}
+
+std::string recover_missing_first_letter(const std::string &line) {
+    static const std::vector<std::string> known_commands = {
+        "help", "?", "pwd", "ls", "touch", "mkdir", "cat", "edit", "open", "gedit",
+        "shell", "ask", "ai", "chat", "run", "debug", "cd", "exit", "quit", ":q", "deactivate"
+    };
+
+    auto is_known = [&](const std::string &candidate) {
+        for (const auto &cmd : known_commands) {
+            if (candidate == cmd) return true;
+            if (starts_with(candidate, cmd + " ")) return true;
+        }
+        return false;
+    };
+
+    if (is_known(line)) return line;
+
+    static const std::string prefixes = "acdeghilmopqrstux";
+    for (char prefix : prefixes) {
+        std::string candidate = std::string(1, prefix) + line;
+        if (is_known(candidate)) return candidate;
+    }
+
+    return line;
+}
+
 std::string get_option_value(const std::string &arg, const std::string &prefix) {
     if (starts_with(arg, prefix)) return arg.substr(prefix.size());
     return {};
@@ -277,9 +308,27 @@ int run_code_file(PromptShell &shell, const std::string &mode, const std::string
         return 2;
     }
 
-    std::string user_debug_prompt = std::string("Please debug the following C++ program and provide: (1) annotated lines; (2) root-cause explanations; (3) minimal corrected code; (4) concept explanation; (5) one-line summary.\n\nCode:\n")
-        + code + "\n\nCOMPILE OUTPUT:\n" + rr.compile_output + "\n\nRUN OUTPUT:\n" + rr.run_output;
-    return shell.run(user_debug_prompt, mode, std::string("debug"));
+    // Show compiler output first before asking the model
+    std::cout << "--- Compiler Output ---\n";
+    if (!rr.compile_output.empty()) {
+        std::cout << rr.compile_output << "\n";
+    } else {
+        std::cout << "(no compiler errors)\n";
+    }
+    if (!rr.run_output.empty()) {
+        std::cout << "--- Runtime Output ---\n" << rr.run_output << "\n";
+    }
+    std::cout << "\n--- Explanation ---\n\n" << std::flush;
+
+    // Build debug prompt that hints at educational format
+    std::string user_debug_prompt =
+        "This C++ code has a compiler error.\n\n"
+        "CODE:\n" + code + "\n\n"
+        "ERROR:\n" + rr.compile_output + "\n";
+    
+    int debug_rc = shell.run(user_debug_prompt, mode, std::string("debug"));
+    std::cout << std::flush;
+    return debug_rc;
 }
 
 std::string cwd_string() {
@@ -428,9 +477,7 @@ void run_interactive_session(PromptShell &shell, const std::string &mode, const 
         std::cout << "\n" << colored("PromptShell>", "1;36") << " ";
         if (!std::getline(std::cin, prompt)) break;
 
-        std::string trimmed = prompt;
-        trimmed.erase(trimmed.begin(), std::find_if(trimmed.begin(), trimmed.end(), [](unsigned char ch){ return !std::isspace(ch); }));
-        trimmed.erase(std::find_if(trimmed.rbegin(), trimmed.rend(), [](unsigned char ch){ return !std::isspace(ch); }).base(), trimmed.end());
+        std::string trimmed = recover_missing_first_letter(trim_copy(prompt));
 
         if (trimmed.empty()) continue;
         if (trimmed == "exit" || trimmed == "quit" || trimmed == ":q" || trimmed == "deactivate") break;
